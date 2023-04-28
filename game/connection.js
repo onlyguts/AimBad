@@ -3,7 +3,7 @@ const logoImg = logoContainer.querySelector("img");
 const logoutButton = document.getElementById("logout-button-1");
 
 logoImg.addEventListener("click", () => {
-  window.location.href = "../registration/login.php"; // Rediriger vers la page d'accueil
+  window.location.href = "../register-login/login.php"; // Rediriger vers la page d'accueil
 });
 
 logoutButton.addEventListener("click", () => {

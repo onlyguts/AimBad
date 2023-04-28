@@ -75,7 +75,7 @@ function arreterTimer() {
 function reinitialiserTimer() {
   arreterTimer();
   timeLeft = 10;
-  timerElement.textContent = `10.000`;
+  timerElement.textContent = `10:000`;
 }
 
 function mettreAJourTemps() {
@@ -202,7 +202,7 @@ fetch("http://localhost:0080/api/score")
   
 
   logoImg.addEventListener("click", () => {
-    window.location.href = "../registration/login.php"; // Rediriger vers la page d'accueil
+    window.location.href = "../register-login/login.php"; // Rediriger vers la page d'accueil
   });
   
   logoutButton.addEventListener("click", () => {

@@ -6,7 +6,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/user.css" rel="stylesheet">
 
-   <!-- try -->
+   
   </head>
   <body>
     <div class="menu">
