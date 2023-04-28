@@ -1,0 +1,112 @@
+/* Score page */
+body {
+  background-color: #0e0e0e;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.player-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.menu {
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  border-bottom: 2px solid white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #1a1a1a;
+}
+
+tbody tr:hover {
+  background-color: #2f2f2f;
+}
+
+.position {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.one {
+  background-color: gold;
+}
+
+.two {
+  background-color: silver;
+}
+
+.three {
+  background-color: #cd7f32;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination a,
+.current-page {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.pagination a:hover {
+  background-color: #2f2f2f;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+
+
+
