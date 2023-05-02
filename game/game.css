@@ -42,8 +42,8 @@ h1 {
 
 /* Styles pour les cercles */
 .cercle {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: red;
   border: 1.5px solid #000000;
@@ -141,4 +141,30 @@ h1 {
   align-items: center;
   margin-top: 40px;
   margin-right: 5px;
+}
+
+#background-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.background-button {
+  padding: 10px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFA500;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.background-button:hover {
+  background-color: #FFC107;
 }

@@ -49,11 +49,7 @@ function ajouterCercle() {
 }
 
 function supprimerCercle(cercle) {
-  cercle.style.transition = "opacity 0.5s"; // ajouter une transition de 0.5s pour l'opacité
-  cercle.style.opacity = "0"; // rendre le cercle transparent
-  setTimeout(() => {
-    cercle.remove();
-  }, 1000); // attendre 0.5s avant de supprimer définitivement le cercle
+  cercle.remove();
   score += 1;
   scoreElement.textContent = score;
   ajouterCercle();
@@ -61,10 +57,10 @@ function supprimerCercle(cercle) {
 
 
 function demarrerTimer() {
-  timeLeft = 10;
+  timeLeft = 25;
   startTime = new Date();
   mettreAJourTemps();
-  timerInterval = setInterval(mettreAJourTemps, 10);
+  timerInterval = setInterval(mettreAJourTemps, 25);
 }
 
 function arreterTimer() {
@@ -74,8 +70,8 @@ function arreterTimer() {
 
 function reinitialiserTimer() {
   arreterTimer();
-  timeLeft = 10;
-  timerElement.textContent = `10.000`;
+  timeLeft = 25;
+  timerElement.textContent = `25:000`;
 }
 
 function mettreAJourTemps() {
@@ -123,86 +119,8 @@ function reinitialiserJeu() {
 ajouterCercle();
 
 
-const tableBody = document.querySelector("tbody");
-const paginationContainer = document.querySelector(".pagination");
-
-// Récupération des scores depuis l'API
-fetch("http://localhost:0080/api/score")
-  .then(response => response.json())
-  .then(scores => {
-    // Tri des scores du plus grand au plus petit
-    scores.sort((a, b) => b.score - a.score);
-
-    // Génération des lignes de tableau pour chaque score
-    let position = 1;
-    for (let score of scores) {
-      const tr = document.createElement("tr");
-      const tdPosition = document.createElement("td");
-      const tdUsername = document.createElement("td");
-      const tdScore = document.createElement("td");
-
-      tdPosition.textContent = position;
-      tdUsername.textContent = score.username;
-      tdScore.textContent = score.score;
-
-      tr.appendChild(tdPosition);
-      tr.appendChild(tdUsername);
-      tr.appendChild(tdScore);
-
-      tableBody.appendChild(tr);
-
-      position++;
-    }
-
-    // Récupération de la pagination
-    const paginationLinks = paginationContainer.querySelectorAll("a");
-
-    // Ajout de l'écouteur d'événement sur chaque lien de pagination
-    paginationLinks.forEach(link => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        const page = link.dataset.page;
-
-        // Suppression des lignes de tableau existantes
-        tableBody.innerHTML = "";
-
-        // Récupération des scores pour la page sélectionnée
-        fetch(`http://localhost:0080/api/score?page=${page}`)
-          .then(response => response.json())
-          .then(scores => {
-            // Tri des scores du plus grand au plus petit
-            scores.sort((a, b) => b.score - a.score);
-
-            // Génération des lignes de tableau pour chaque score
-            let position = (page - 1) * 10 + 1;
-            for (let score of scores) {
-              const tr = document.createElement("tr");
-              const tdPosition = document.createElement("td");
-              const tdUsername = document.createElement("td");
-              const tdScore = document.createElement("td");
-
-              tdPosition.textContent = position;
-              tdUsername.textContent = score.username;
-              tdScore.textContent = score.score;
-
-              tr.appendChild(tdPosition);
-              tr.appendChild(tdUsername);
-              tr.appendChild(tdScore);
-
-              tableBody.appendChild(tr);
-
-              position++;
-            }
-          })
-          .catch(error => console.error(error));
-      });
-    });
-  })
-  .catch(error => console.error(error));
-  
-
   logoImg.addEventListener("click", () => {
-    window.location.href = "../registration/login.php"; // Rediriger vers la page d'accueil
+    window.location.href = "../register-login/login.php"; // Rediriger vers la page d'accueil
   });
   
   logoutButton.addEventListener("click", () => {
@@ -218,15 +136,6 @@ fetch("http://localhost:0080/api/score")
       .catch(error => console.error(error));
   });
   
-  logoutButton1.addEventListener("click", () => {
-    fetch("../logout.php")
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          window.location.href = "../index.php";
-        } else {
-          console.log(data.message);
-        }
-      })
-      .catch(error => console.error(error));
-});
+  function changeBackground(imageUrl) {
+    document.getElementById('cercles-container').style.backgroundImage = 'url(' + imageUrl + ')';
+  }

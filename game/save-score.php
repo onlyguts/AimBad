@@ -17,17 +17,18 @@ if(isset($_POST['username']) && $_POST['username'] !== '') {
   }
 
   // Vérification si l'utilisateur existe déjà
-  $sql_check_user = "SELECT * FROM scores WHERE username='$username'";
+  $sql_check_user = "SELECT * FROM user WHERE Username='$username'";
   $result = mysqli_query($conn, $sql_check_user);
 
   if (mysqli_num_rows($result) > 0) {
     // Récupération de l'ancien score
     $row = mysqli_fetch_assoc($result);
     $old_score = $row['score'];
+    $id = $row['Id'];
     
     // Mise à jour du score pour l'utilisateur existant si le nouveau score est plus grand
     if ($score > $old_score) {
-      $sql_update = "UPDATE scores SET score='$score' WHERE username='$username'";
+      $sql_update = "UPDATE user SET score='$score' WHERE Id='$id'";
       if (mysqli_query($conn, $sql_update)) {
         echo "Score updated successfully";
       } else {
@@ -36,14 +37,14 @@ if(isset($_POST['username']) && $_POST['username'] !== '') {
     } else {
       echo "Score not updated";
     }
-  } else {
-    // Insertion du nouveau score pour l'utilisateur
-    $sql_insert = "INSERT INTO scores (username, score) VALUES ('$username', '$score')";
-    if (mysqli_query($conn, $sql_insert)) {
-      echo "Score saved successfully";
-    } else {
-      echo "Error saving score: " . mysqli_error($conn);
-    }
+
+      $sql_update = "UPDATE user SET Score_final=Score_final + $score WHERE Id='$id'";
+      if (mysqli_query($conn, $sql_update)) {
+        echo "Score updated successfully";
+      } else {
+        echo "Error updating score: " . mysqli_error($conn);
+      }
+
   }
 
   // Fermeture de la connexion à la base de données

@@ -20,3 +20,4 @@ form.addEventListener('submit', async (event) => {
   const result = await response.text();
   console.log(result);
 });
+

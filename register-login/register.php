@@ -1,55 +1,33 @@
 <?php
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $servname = 'localhost';
     $user = 'root';
     $pass = 'root';
     $dbname = 'aimbad';
-
-    if (isset($_FILES['profile-picture'])) {
-      $file_name = $_FILES['profile-picture']['name'];
-      $file_tmp = $_FILES['profile-picture']['tmp_name'];
-      $file_size = $_FILES['profile-picture']['size'];
-      $file_type = $_FILES['profile-picture']['type'];
-      $file_ext = strtolower(end(explode('.', $file_name)));
-      $extensions = array("jpeg", "jpg", "png");
-    
-      if (in_array($file_ext, $extensions) === false) {
-        $error = "extension not allowed, please choose a JPEG, JPG, or PNG file.";
-      }
-    
-      if ($file_size > 2097152) {
-        $error = 'File size must be exactly 2 MB';
-      }
-    
-      if (empty($error) == true) {
-        move_uploaded_file($file_tmp, "../uploads/" . $file_name);
-        // save the filename in the database or wherever you need it
-      }
-    }
-
     // Créer une connexion à la base de données
     $conn = mysqli_connect($servname, $user, $pass, $dbname);
-
     // Vérifier la connexion
     if (!$conn) {
         die('Connection failed: ' . mysqli_connect_error());
     }
-
-    
     // Récupérer les identifiants de l'utilisateur
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $url = $_POST['url'];
+    $url = isset($_POST['url']) ? $_POST['url'] : "https://www.logolynx.com/images/logolynx/03/039b004617d1ef43cf1769aae45d6ea2.png";
+
+    $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
     // Échapper les caractères spéciaux pour éviter les injections SQL
     $username = mysqli_real_escape_string($conn, $username);
     $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
+    $password_hashed = mysqli_real_escape_string($conn, $password_hashed);
     $url = mysqli_real_escape_string($conn, $url);
 
+    if ($url === '') {
+      $url = "https://www.logolynx.com/images/logolynx/03/039b004617d1ef43cf1769aae45d6ea2.png";
+    }
 
     // Vérifier si l'utilisateur existe déjà dans la base de données
     $sql = "SELECT * FROM user WHERE Username='$username'";
@@ -60,16 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_num_rows($result) == 0) {
         if (mysqli_num_rows($result2) == 0) {
+          if (strlen($_POST['username']) < 3) {
+           
+            $error = "Le nom d'utilisateur doit être d'au moins 3 caractères.";
+          } else {
             // Si l'utilisateur n'existe pas encore, ajouter ses identifiants à la base de données
-            $sql = "INSERT INTO user (Username, Email, Password, Url) VALUES ('$username', '$email', '$password', '$url')";
+            $sql = "INSERT INTO user (Username, Email, Password, Url) VALUES ('$username', '$email', '$password_hashed', '$url')";
             $result = mysqli_query($conn, $sql);
     
             // Rediriger vers la page de connexion
             header('Location: ../index.php');
             session_start();
             $_SESSION['username'] = $username;
-           
             exit();
+          }
         } else {
             // Si l'utilisateur existe déjà, afficher un message d'erreur
             $error = 'Email already taken';
@@ -84,16 +66,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="login.css">
-
+  <link href="../css/logo.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../asset/img/logo.png">
   <title>Register</title>
 </head>
 <body>
-  <h1>Register</h1>
+<div class="logo-container">
+    <a href="../index.php" class="lien-icone">
+      <img src="../asset/img/logo.png" alt="" class="logo">
+      <h1>AimBad</h1>
+    </a>
+  </div>
+ 
   <?php if (isset($error)): ?>
     <p><?= $error ?></p>
   <?php endif ?>
