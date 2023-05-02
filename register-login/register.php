@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
         } else {
             // Si l'utilisateur existe déjà, afficher un message d'erreur
-            $error = 'Email already taken';
+            $error = 'Email already taken!';
         }
     } else {
         // Si l'utilisateur existe déjà, afficher un message d'erreur
-        $error = 'Username already taken';
+        $error = 'Username already taken!';
     }
 
     // Fermer la connexion à la base de données
