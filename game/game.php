@@ -83,7 +83,7 @@
   <button id="background-button-2" class="background-button" onclick="changeBackground('../asset/img/background-game/vertigo.jpg')">Vertigo</button>
 </div>
 
-    <p id="game-over-message" class="hidden">END</p>
+    <p id="game-over-message" class="hidden">FINISH</p>
     <script src="app.js"></script>
   </body>
 </html>
