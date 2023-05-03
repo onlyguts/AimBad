@@ -100,42 +100,37 @@ if (isset($_SESSION['username'])) {
             </a>
         </div>
         <div class="panel-top">
-        <h1 class="simple-title">Panel Admin</h1>
-        <form method="get">
-            
-            <label for="search"></label>
-            <input type="text" id="search" name="search" placeholder="Nom d'utilisateur"
-                value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-                
-            <button type="submit">Rechercher</button>
-        </form>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Best Score</th>
-                    <th>Total Score</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($users as $user): ?>
-                <tr>
-                    <td><?php echo $user['Id']; ?></td>
-                    <td><?php echo $user['Username']; ?></td>
-                    <td><?php echo $user['Email']; ?></td>
-                    <td><?php echo $user['Score']; ?></td>
-                    <td><?php echo $user['Score_final']; ?></td>
-                    <td><button class="delete-button" data-id="<?php echo $user['Id']; ?>">&times;</button></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <script src="admin.js"></script>
+            <h1 class="simple-title">Panel Admin</h1>
+            <form method="get" class="search-button">
+                <label for="search"></label>
+                <input type="text" id="search" name="search" placeholder="Nom d'utilisateur"
+                    value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+
+                <button type="submit">Rechercher</button>
+            </form>
+            <div>
+                <table class="leaderboard-menu">
+                    <tr>
+                        <th class="top">Id</th>
+                        <th class="top">Username</th>
+                        <th class="top">Email</th>
+                        <th class="top">Best Score</th>
+                        <th class="top">Total Score</th>
+                        <th class="top">Actions</th>
+                    </tr>
+                    <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?php echo $user['Id']; ?></td>
+                        <td><?php echo $user['Username']; ?></td>
+                        <td><?php echo $user['Email']; ?></td>
+                        <td><?php echo $user['Score']; ?></td>
+                        <td><?php echo $user['Score_final']; ?></td>
+                        <td><button class="delete-button" data-id="<?php echo $user['Id']; ?>">&times;</button></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <script src="admin.js"></script>
 </body>
 
 </html>

@@ -125,7 +125,7 @@
     </div>
     <table>
       <thead>
-        <tr >
+        <tr>
           <th >Position</th>
           <th >Username</th>
           <th >Best Score</th>

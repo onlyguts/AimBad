@@ -62,7 +62,7 @@ if (isset($_SESSION['username'])) {
       </div>
       <div id="admin-button">
   <a href="admin/admin.php">
-    <?php if (isset($result) && $result['admin'] == 1) {echo '<button id="admin-btn">Actions d\'administrateur</button>';}?>
+    <?php if (isset($result) && $result['admin'] == 1) {echo '<button id="admin-btn">Panel Admin</button>';}?>
   </a>
 </div>
 

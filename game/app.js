@@ -21,11 +21,11 @@ xhr.open('GET', 'name.php', true);
 xhr.send();
 
 // Traiter la réponse de la requête
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
   if (xhr.readyState === 4 && xhr.status === 200) {
-      const usernames = xhr.responseText;
-      const userList = usernames.split(","); // Si la réponse est une liste séparée par des virgules
-      username = userList[0]; // Affecter le premier nom d'utilisateur à la variable
+    const usernames = xhr.responseText;
+    const userList = usernames.split(","); // Si la réponse est une liste séparée par des virgules
+    username = userList[0]; // Affecter le premier nom d'utilisateur à la variable
   }
 };
 
@@ -76,29 +76,29 @@ function reinitialiserTimer() {
 
 function mettreAJourTemps() {
   endTime = new Date();
-  const tempsEcoule = (endTime - startTime); 
+  const tempsEcoule = (endTime - startTime);
   const minutes = Math.floor(tempsEcoule / 60000);
   const secondesRestantes = Math.max(Math.floor((timeLeft * 1000 - tempsEcoule) / 1000), 0).toString().padStart(2, "0");
   const millisecondesRestantes = Math.max((timeLeft * 1000 - tempsEcoule) % 1000, 0).toString().padStart(3, "0");
-  timerElement.textContent = `${secondesRestantes}:${millisecondesRestantes}`; 
+  timerElement.textContent = `${secondesRestantes}:${millisecondesRestantes}`;
   if (tempsEcoule >= timeLeft * 1000) {
-    clearInterval(timerInterval); 
+    clearInterval(timerInterval);
     gameOverMessage.classList.remove("hidden");
     cerclesContainer.innerHTML = "";
     fetch('save-score.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: `username=${username}&score=${score}`
-    })
-    .then(response => response.text())
-    .then(result => {
-      console.log(result); // Afficher la réponse du serveur
-    })
-    .catch(error => {
-      console.error(error); // Afficher les erreurs éventuelles
-    });
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `username=${username}&score=${score}`
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result); // Afficher la réponse du serveur
+      })
+      .catch(error => {
+        console.error(error); // Afficher les erreurs éventuelles
+      });
   }
 }
 
@@ -119,23 +119,23 @@ function reinitialiserJeu() {
 ajouterCercle();
 
 
-  logoImg.addEventListener("click", () => {
-    window.location.href = "../register-login/login.php"; // Rediriger vers la page d'accueil
-  });
-  
-  logoutButton.addEventListener("click", () => {
-    fetch("../logout.php")
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          window.location.href = "../index.php";
-        } else {
-          console.log(data.message);
-        }
-      })
-      .catch(error => console.error(error));
-  });
-  
-  function changeBackground(imageUrl) {
-    document.getElementById('cercles-container').style.backgroundImage = 'url(' + imageUrl + ')';
-  }
+logoImg.addEventListener("click", () => {
+  window.location.href = "../register-login/login.php"; // Rediriger vers la page d'accueil
+});
+
+logoutButton.addEventListener("click", () => {
+  fetch("../logout.php")
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = "../index.php";
+      } else {
+        console.log(data.message);
+      }
+    })
+    .catch(error => console.error(error));
+});
+
+function changeBackground(imageUrl) {
+  document.getElementById('cercles-container').style.backgroundImage = 'url(' + imageUrl + ')';
+}

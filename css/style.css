@@ -125,19 +125,23 @@ li {
   color: #fffdfd;
 }
 
-
 #admin-button {
-
-  color: #fff;
-  border: none;
   padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
+#admin-btn {
+  padding: 5px 20px;
+  border-radius: 10px; 
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+}
 
+#admin-btn:hover {
+  padding: 5px 20px;
+  border-radius: 10px; 
+  background-color: #ffa500;
+  border: 2px solid #ffa500;
+}
 
 .player-connect h4 {
   font-weight: bold;
